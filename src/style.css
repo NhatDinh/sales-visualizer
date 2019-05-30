@@ -88,8 +88,8 @@ body {
 }
 
 .is-dark {
-  background: #4d4d4d;
-  height: 60px;
+  background-color: black;
+  height: 80px;
 }
 
 .nav-secondary {

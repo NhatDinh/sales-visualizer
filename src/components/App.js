@@ -41,6 +41,7 @@ class App extends React.Component {
   getData = arg => {
     // google sheets data
     const arr = this.state.items;
+
     const arrLen = arr.length;
     // kpi's
     // amazon revenue
@@ -96,9 +97,9 @@ class App extends React.Component {
           });
         }
         productViews += parseInt(arr[i].product_views);
-        purchaseRate += parseInt(arr[i].purchase_rate / 3);
-        checkoutRate += parseInt(arr[i].checkout_rate / 3);
-        abandonedRate += parseInt(arr[i].abandoned_rate / 3);
+        purchaseRate += parseInt(arr[i].purchase_rate);
+        checkoutRate += parseInt(arr[i].checkout_rate);
+        abandonedRate += parseInt(arr[i].abandoned_rate);
         orderesTrendnw += parseInt(arr[i].orders_nw);
         orderesTrendsw += parseInt(arr[i].orders_sw);
         orderesTrendc += parseInt(arr[i].orders_c);
@@ -150,23 +151,18 @@ class App extends React.Component {
   };
 
   clickUpload = event => {
-    console.log("upload clicked");
     let customersUrl = "1hJxwr-ydhxO4g0upUlfT19BDT9YJilxIW3779DS2djk";
     let newUrl = `https://sheets.googleapis.com/v4/spreadsheets/${customersUrl}/values:batchGet?ranges=Sheet1&majorDimension=ROWS&key=AIzaSyAk0svS0tjBgrZ4ywig4RY9wd3rrhGBaig`;
-    console.log("newUrl", customersUrl);
     this.setState({ isUploadMode: true, url: newUrl });
-    console.log(this.state.url, this.state.isUploadMode);
     this.populateDashboard(newUrl);
   };
 
   populateDashboard = url => {
-    console.log("current url:", this.state.url);
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        console.log("Response", data);
+        console.log("data:  ", data);
         let batchRowValues = data.valueRanges[0].values;
-
         const rows = [];
         for (let i = 1; i < batchRowValues.length; i++) {
           let rowObject = {};
@@ -212,8 +208,8 @@ class App extends React.Component {
     return (
       <Container>
         {/* static navbar - top */}
-        <Nav className="navbar navbar-expand-lg fixed-top is-white is-dark-text">
-          <Container className="navbar-brand h1 mb-0 text-large font-medium">
+        <Nav className="navbar navbar-expand-lg fixed-top is-infront is-dark">
+          <Container className="navbar-brand h1 mb-0 text-large font-medium is-light-text">
             Sales Visualizer
           </Container>
           <Container className="navbar-nav ml-auto">
@@ -248,7 +244,7 @@ class App extends React.Component {
         </Nav>
 
         {/* content area start */}
-        <Container className="pr-5 pl-5 pt-5 pb-5">
+        <Container className="pr-5 pl-5 pt-5 pb-5 is-behind">
           {/* row 1 - revenue */}
           <Container className="row">
             <Container className="col-lg-3 col-sm-6 is-light-text mb-4">

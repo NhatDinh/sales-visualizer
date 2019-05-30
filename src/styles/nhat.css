@@ -15,7 +15,8 @@
 .upload-btn:hover {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
   transform: translateY(-10px);
-  color: #adff2f;
+  background-color: white;
+  color: black;
 }
 
 .hide {
@@ -24,4 +25,12 @@
 
 .show {
   display: block;
+}
+
+/* z-index */
+.is-infront {
+  z-index: 1;
+}
+.is-behind {
+  z-index: 0;
 }
